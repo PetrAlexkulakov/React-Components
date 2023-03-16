@@ -1,0 +1,11 @@
+.navbar{
+    background-color: aqua;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.navbar__links{
+    display: flex;
+    gap: 2%;
+}
