@@ -1,6 +1,7 @@
 import React from 'react';
 import CardItem from './CardItem';
 import axios from 'axios';
+import MyInput from './UI/input/MyInput';
 
 const posts: { id: number; title: string; body: string }[] = (
   await axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -21,6 +22,7 @@ class CardsList extends React.Component {
   render() {
     return (
       <div className="card-list">
+        <MyInput />
         {posts.map((post) => (
           <CardItem {...post} image={images[this.count++].url} key={post.id} />
         ))}
