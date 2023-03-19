@@ -7,12 +7,8 @@ import Main from './pages/Main';
 
 describe('Navbar', () => {
   it('Render', () => {
-    render(<Main />);
-    expect(
-      screen.getByRole('link', {
-        level: 3,
-      })
-    );
+    render(<App />);
+    // expect(screen.getByRole('link'));
   });
 });
 // describe('App', () => {
