@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import classes from './Navbar.module.css';
 
 const Navbar = () => {
-  console.log(document);
   return (
     <div className={classes.navbar}>
       <div className={classes.navbar__links}>

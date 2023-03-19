@@ -2,15 +2,8 @@ import React from 'react';
 import CardItem from './CardItem';
 import axios from 'axios';
 import MyInput from './UI/input/MyInput';
-
-let posts: { id: number; title: string; body: string }[];
-let images: { url: string }[];
-
-async function doPosts() {
-  posts = (await axios.get('https://jsonplaceholder.typicode.com/posts')).data.slice(0, 10);
-  images = (await axios.get('https://jsonplaceholder.typicode.com/photos')).data.slice(0, 20);
-}
-await doPosts();
+import { posts } from '../data/posts';
+import { photos } from '../data/images';
 
 class CardsList extends React.Component {
   private count: number;
@@ -23,8 +16,9 @@ class CardsList extends React.Component {
     return (
       <div className="card-list">
         <MyInput />
+        <h1>There can be some problems with image, because server have troubles. I am sorry!</h1>
         {posts.map((post) => (
-          <CardItem {...post} image={images[this.count++].url} key={post.id} />
+          <CardItem {...post} image={photos[this.count++].url} key={post.id} />
         ))}
       </div>
     );
