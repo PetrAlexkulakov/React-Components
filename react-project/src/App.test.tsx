@@ -1,19 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it } from 'vitest';
-import CardsList from './components/CardsList';
 import App from './App';
-import Main from './pages/Main';
+import { MemoryRouter } from 'react-router-dom';
+import AppRouter from './components/UI/AppRouter';
 
-describe('Navbar', () => {
+describe('App', () => {
   it('Render', () => {
     render(<App />);
-    // expect(screen.getByRole('link'));
+  });
+  it('Renders not found if invalid path', () => {
+    const badRoute = '/some/bad/route';
+    render(
+      <MemoryRouter initialEntries={[badRoute]}>
+        <AppRouter />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('heading')).toHaveTextContent('Not Found');
   });
 });
-// describe('App', () => {
-//   it('Render', () => {
-//     render(<App />);
-//     expect(document.);
-//   });
-// });
