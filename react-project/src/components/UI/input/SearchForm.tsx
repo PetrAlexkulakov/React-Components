@@ -1,7 +1,8 @@
 import React from 'react';
+import classes from './MyInput.module.css';
 import { ChangeEvent } from 'react';
 
-export class SearchForm extends React.Component<
+class SearchForm extends React.Component<
   Record<string, (value: ChangeEvent<HTMLInputElement>) => void>,
   { value: string }
 > {
@@ -14,15 +15,19 @@ export class SearchForm extends React.Component<
 
   handleChange(event: ChangeEvent<HTMLInputElement>) {
     this.setState({ value: event.target.value });
+    localStorage.setItem('searchString', event.target.value);
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
-      <form>
-        <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-      </form>
+      <input
+        placeholder="Search"
+        onChange={this.handleChange}
+        className={classes.myInput}
+        {...this.props}
+        value={this.state.value}
+        type="text"
+      />
     );
   }
 }

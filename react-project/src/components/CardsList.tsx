@@ -1,7 +1,6 @@
 import React from 'react';
 import CardItem from './CardItem';
-import axios from 'axios';
-import MyInput from './UI/input/MyInput';
+import SearchForm from './UI/input/SearchForm';
 import { posts } from '../data/posts';
 import { photos } from '../data/images';
 
@@ -15,8 +14,7 @@ class CardsList extends React.Component {
   render() {
     return (
       <div className="card-list">
-        <MyInput />
-        <h1>There can be some problems with image, because server have troubles. I am sorry!</h1>
+        <SearchForm />
         {posts.map((post) => (
           <CardItem {...post} image={photos[this.count++].url} key={post.id} />
         ))}

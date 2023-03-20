@@ -1,4 +1,3 @@
-/* eslint-disable react/no-direct-mutation-state */
 import React from 'react';
 import classes from './MyInput.module.css';
 import { ChangeEvent } from 'react';
