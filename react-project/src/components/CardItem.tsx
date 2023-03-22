@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CardItem extends React.Component<{ title: string; body: string; image: string }> {
+class CardItem extends React.Component<{ title?: string; body?: string; image?: string }> {
   constructor(props: { title: string; body: string; image: string }) {
     super(props);
   }
