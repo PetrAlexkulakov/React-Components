@@ -10,6 +10,9 @@ type MyState = {
     body?: string;
     title?: string;
     key?: string;
+    date?: string;
+    accept?: string;
+    switch?: string;
   }[];
 };
 
@@ -17,6 +20,8 @@ class Forms extends React.Component<Record<string, never>, MyState> {
   private formName: RefObject<HTMLInputElement>;
   private formDate: RefObject<HTMLInputElement>;
   private formCity: string;
+  private formAccept: RefObject<HTMLInputElement>;
+  private formSwitch: string;
   constructor(props: Record<string, never>) {
     super(props);
     this.state = { posts: [] };
@@ -25,6 +30,8 @@ class Forms extends React.Component<Record<string, never>, MyState> {
     this.formDate = React.createRef() as RefObject<HTMLInputElement>;
     this.formCity = 'Moscow';
     this.selectChange = this.selectChange.bind(this);
+    this.formAccept = React.createRef() as RefObject<HTMLInputElement>;
+    this.formSwitch = 'First';
   }
 
   private addNewCard = (e: MouseEvent) => {
@@ -35,10 +42,13 @@ class Forms extends React.Component<Record<string, never>, MyState> {
         {
           key: String(new Date()),
           title: this.formDate.current?.value,
-          body: this.formName.current?.value + ' ' + this.formCity,
+          body: this.formName.current?.value,
+          date: this.formCity,
+          switch: this.formSwitch,
         },
       ],
     });
+    this.formSwitch = 'First';
   };
 
   private selectChange(e: BaseSyntheticEvent) {
@@ -49,15 +59,37 @@ class Forms extends React.Component<Record<string, never>, MyState> {
     return (
       <div>
         <Header title="Forms" />
-        <form>
-          Text: <MyInput ref={this.formName} type="text" placeholder="Text" />
-          Date: <MyInput ref={this.formDate} type="date" placeholder="Date" />
-          City:
-          <select onChange={this.selectChange as unknown as ChangeEventHandler<HTMLSelectElement>}>
-            <option value="Moscow">Moscow</option>
-            <option value="New York">New York</option>
-            <option value="Another">Another</option>
-          </select>
+        <form className="form-wrapper">
+          <div>
+            Text: <MyInput ref={this.formName} type="text" placeholder="Text" />
+          </div>
+          <div>
+            Date: <MyInput ref={this.formDate} type="date" placeholder="Date" />
+          </div>
+          <div>
+            City:
+            <select
+              onChange={this.selectChange as unknown as ChangeEventHandler<HTMLSelectElement>}
+            >
+              <option value="Moscow">Moscow</option>
+              <option value="New York">New York</option>
+              <option value="Another">Another</option>
+            </select>
+          </div>
+          <div>
+            <MyInput ref={this.formAccept} type="checkbox" /> I consent to my personal data
+          </div>
+          <div>
+            <MyInput
+              onClick={() => (this.formSwitch = 'First')}
+              type="radio"
+              name="number"
+              checked
+            />{' '}
+            First{' '}
+            <MyInput onClick={() => (this.formSwitch = 'Second')} type="radio" name="number" />{' '}
+            Second
+          </div>
           <MyButton onClick={this.addNewCard as unknown as MouseEventHandler<HTMLButtonElement>}>
             Create Card
           </MyButton>
