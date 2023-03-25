@@ -10,7 +10,7 @@ type MyState = {
     body?: string;
     title?: string;
     key?: string;
-    date?: string;
+    city?: string;
     accept?: string;
     switch?: string;
     image?: string;
@@ -41,7 +41,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
 
   private addNewCard = (e: MouseEvent) => {
     e.preventDefault();
-    if (confirm('Are u sure?')) {
+    if (this.validForm() && confirm('Are u sure?')) {
       this.setState({
         posts: [
           ...this.state.posts,
@@ -49,7 +49,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
             key: String(new Date()),
             title: this.formDate.current?.value,
             body: this.formName.current?.value,
-            date: this.formCity,
+            city: this.formCity,
             switch: this.formSwitch,
             image: URL.createObjectURL(this.formFile.current!.files![0]),
           },
@@ -66,6 +66,19 @@ class Forms extends React.Component<Record<string, never>, MyState> {
 
   private selectChange(e: BaseSyntheticEvent) {
     this.formCity = String(e.target.value);
+  }
+
+  private validForm() {
+    if (
+      this.formDate.current?.value === '' ||
+      this.formName.current?.value === '' ||
+      this.formFile.current!.files![0] == null ||
+      this.formAccept.current?.checked === false
+    ) {
+      alert('Check the form fields!');
+      return false;
+    }
+    return true;
   }
 
   render() {

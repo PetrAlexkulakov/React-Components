@@ -4,7 +4,7 @@ interface CardObject {
   title?: string;
   body?: string;
   image?: string;
-  date?: string;
+  city?: string;
   switch?: string;
 }
 
@@ -18,7 +18,7 @@ class CardItem extends React.Component<CardObject> {
         <h3>{this.props.title}</h3>
         <img className="card__image" src={this.props.image}></img>
         <p>{this.props.body}</p>
-        <p>{this.props.date}</p>
+        <p>{this.props.city}</p>
         <p>{this.props.switch}</p>
       </div>
     );
