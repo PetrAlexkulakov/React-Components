@@ -18,6 +18,7 @@ type MyState = {
 };
 
 class Forms extends React.Component<Record<string, never>, MyState> {
+  private form: HTMLFormElement | null;
   private formName: RefObject<HTMLInputElement>;
   private formDate: RefObject<HTMLInputElement>;
   private formCity: string;
@@ -28,6 +29,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
     super(props);
     this.state = { posts: [] };
 
+    this.form = null;
     this.formName = React.createRef() as RefObject<HTMLInputElement>;
     this.formDate = React.createRef() as RefObject<HTMLInputElement>;
     this.formCity = 'Moscow';
@@ -54,8 +56,13 @@ class Forms extends React.Component<Record<string, never>, MyState> {
         ],
       });
       this.formSwitch = 'First';
+      this.clearForm();
     }
   };
+
+  private clearForm() {
+    this.form?.reset();
+  }
 
   private selectChange(e: BaseSyntheticEvent) {
     this.formCity = String(e.target.value);
@@ -65,7 +72,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
     return (
       <div>
         <Header title="Forms" />
-        <form className="form-wrapper">
+        <form className="form-wrapper" ref={(form) => (this.form = form)}>
           <div>
             Text: <MyInput ref={this.formName} type="text" placeholder="Text" />
           </div>
