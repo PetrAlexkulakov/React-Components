@@ -13,6 +13,7 @@ type MyState = {
     date?: string;
     accept?: string;
     switch?: string;
+    file?: File;
   }[];
 };
 
@@ -22,6 +23,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
   private formCity: string;
   private formAccept: RefObject<HTMLInputElement>;
   private formSwitch: string;
+  private formFile: RefObject<HTMLInputElement>;
   constructor(props: Record<string, never>) {
     super(props);
     this.state = { posts: [] };
@@ -32,6 +34,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
     this.selectChange = this.selectChange.bind(this);
     this.formAccept = React.createRef() as RefObject<HTMLInputElement>;
     this.formSwitch = 'First';
+    this.formFile = React.createRef() as RefObject<HTMLInputElement>;
   }
 
   private addNewCard = (e: MouseEvent) => {
@@ -90,13 +93,18 @@ class Forms extends React.Component<Record<string, never>, MyState> {
             <MyInput onClick={() => (this.formSwitch = 'Second')} type="radio" name="number" />{' '}
             Second
           </div>
+          <MyInput ref={this.formFile} type="file" />
           <MyButton onClick={this.addNewCard as unknown as MouseEventHandler<HTMLButtonElement>}>
             Create Card
           </MyButton>
         </form>
         <div className="card-list">
           {this.state.posts.map((post) => (
-            <CardItem {...post} image={'fsd'} key={post.key} />
+            <CardItem
+              {...post}
+              image={URL.createObjectURL(this.formFile.current!.files![0])}
+              key={post.key}
+            />
           ))}
         </div>
       </div>
