@@ -39,6 +39,9 @@ class Forms extends React.Component<Record<string, never>, MyState> {
 
   private addNewCard = (e: MouseEvent) => {
     e.preventDefault();
+    // if (confirm('Are u sure?')) {
+
+    // }
     this.setState({
       posts: [
         ...this.state.posts,
@@ -87,7 +90,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
               onClick={() => (this.formSwitch = 'First')}
               type="radio"
               name="number"
-              checked
+              defaultChecked
             />{' '}
             First{' '}
             <MyInput onClick={() => (this.formSwitch = 'Second')} type="radio" name="number" />{' '}
@@ -102,7 +105,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
           {this.state.posts.map((post) => (
             <CardItem
               {...post}
-              image={URL.createObjectURL(this.formFile.current!.files![0])}
+              // image={URL.createObjectURL(this.formFile.current!.files![0])}
               key={post.key}
             />
           ))}
