@@ -11,7 +11,7 @@ const MyInput = React.forwardRef<
     onClick?: () => void;
   }
 >((props: { type: string; placeholder?: string }, ref) => {
-  return <input ref={ref} className={classes.MyInput} {...props} />;
+  return <input ref={ref} className={classes.myInput} {...props} />;
 });
 
 export default MyInput;
