@@ -13,7 +13,7 @@ type MyState = {
     date?: string;
     accept?: string;
     switch?: string;
-    file?: File;
+    image?: string;
   }[];
 };
 
@@ -51,6 +51,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
           body: this.formName.current?.value,
           date: this.formCity,
           switch: this.formSwitch,
+          image: URL.createObjectURL(this.formFile.current!.files![0]),
         },
       ],
     });
@@ -103,11 +104,7 @@ class Forms extends React.Component<Record<string, never>, MyState> {
         </form>
         <div className="card-list">
           {this.state.posts.map((post) => (
-            <CardItem
-              {...post}
-              // image={URL.createObjectURL(this.formFile.current!.files![0])}
-              key={post.key}
-            />
+            <CardItem {...post} image={post.image} key={post.key} />
           ))}
         </div>
       </div>
