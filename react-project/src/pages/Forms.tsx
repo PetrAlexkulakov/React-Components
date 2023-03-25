@@ -39,23 +39,22 @@ class Forms extends React.Component<Record<string, never>, MyState> {
 
   private addNewCard = (e: MouseEvent) => {
     e.preventDefault();
-    // if (confirm('Are u sure?')) {
-
-    // }
-    this.setState({
-      posts: [
-        ...this.state.posts,
-        {
-          key: String(new Date()),
-          title: this.formDate.current?.value,
-          body: this.formName.current?.value,
-          date: this.formCity,
-          switch: this.formSwitch,
-          image: URL.createObjectURL(this.formFile.current!.files![0]),
-        },
-      ],
-    });
-    this.formSwitch = 'First';
+    if (confirm('Are u sure?')) {
+      this.setState({
+        posts: [
+          ...this.state.posts,
+          {
+            key: String(new Date()),
+            title: this.formDate.current?.value,
+            body: this.formName.current?.value,
+            date: this.formCity,
+            switch: this.formSwitch,
+            image: URL.createObjectURL(this.formFile.current!.files![0]),
+          },
+        ],
+      });
+      this.formSwitch = 'First';
+    }
   };
 
   private selectChange(e: BaseSyntheticEvent) {
