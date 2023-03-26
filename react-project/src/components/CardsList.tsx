@@ -13,11 +13,13 @@ class CardsList extends React.Component {
 
   render() {
     return (
-      <div className="card-list">
+      <div>
         <SearchForm />
-        {posts.map((post) => (
-          <CardItem {...post} image={photos[this.count++].url} key={post.id} />
-        ))}
+        <div className="card-list">
+          {posts.map((post) => (
+            <CardItem {...post} image={photos[this.count++].url} key={post.id} />
+          ))}
+        </div>
       </div>
     );
   }
