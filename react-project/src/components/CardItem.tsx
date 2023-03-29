@@ -8,21 +8,16 @@ interface CardObject {
   switch?: string;
 }
 
-class CardItem extends React.Component<CardObject> {
-  constructor(props: CardObject) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="card-item">
-        <h3>{this.props.title}</h3>
-        <img className="card__image" src={this.props.image}></img>
-        <p>{this.props.body}</p>
-        <p>{this.props.city}</p>
-        <p>{this.props.switch}</p>
-      </div>
-    );
-  }
-}
+const CardItem = (props: CardObject) => {
+  return (
+    <div className="card-item">
+      <h3>{props.title}</h3>
+      <img className="card__image" src={props.image}></img>
+      <p>{props.body}</p>
+      <p>{props.city}</p>
+      <p>{props.switch}</p>
+    </div>
+  );
+};
 
 export default CardItem;
