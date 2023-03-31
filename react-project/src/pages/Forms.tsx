@@ -21,7 +21,6 @@ const Forms = () => {
   const formName = useRef<HTMLInputElement | null>(null);
   const formDate = useRef<HTMLInputElement | null>(null);
   let formCity = 'Moscow';
-  // const selectChange = selectChange.bind(this);
   const formAccept = useRef<HTMLInputElement | null>(null);
   let formSwitch = 'First';
   const formFile = useRef<HTMLInputElement | null>(null);
