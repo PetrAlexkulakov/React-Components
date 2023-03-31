@@ -1,4 +1,8 @@
-export const posts = [
+import { photos } from './images';
+
+let i = 0;
+
+const base = [
   {
     userId: 1,
     id: 1,
@@ -60,3 +64,10 @@ export const posts = [
     body: 'quo et expedita modi cum officia vel magni\ndoloribus qui repudiandae\nvero nisi sit\nquos veniam quod sed accusamus veritatis error',
   },
 ];
+
+export const posts = base.map(
+  (post: { userId: number; id: number; title: string; body: string; image?: string }) => {
+    post.image = photos[i++].url;
+    return post;
+  }
+) as unknown as { userId: number; id: number; title: string; body: string; image: string }[];

@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classes from './MyInput.module.css';
 import { ChangeEvent } from 'react';
 
-const SearchForm = (props: Record<string, never>) => {
-  const [defValue, setDefVal] = useState(localStorage.getItem('searchString') || '');
-
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setDefVal(event.target.value);
-    localStorage.setItem('searchString', event.target.value);
-  }
-
+const SearchForm = (props: {
+  def: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}) => {
   return (
     <input
       placeholder="Search"
-      onChange={handleChange}
       className={classes.myInput}
       {...props}
-      value={defValue}
+      value={props.def}
       type="text"
     />
   );
