@@ -113,13 +113,16 @@ const Forms = () => {
           Second
         </div>
         <MyInput ref={formFile} type="file" />
-        <MyButton onClick={addNewCard as unknown as MouseEventHandler<HTMLButtonElement>}>
+        <MyButton
+          data-testid="btn-add"
+          onClick={addNewCard as unknown as MouseEventHandler<HTMLButtonElement>}
+        >
           Create Card
         </MyButton>
       </form>
       <div className="card-list">
         {posts.map((post) => (
-          <CardItem {...post} image={post.image} key={post.key} />
+          <CardItem data-testid="card" {...post} image={post.image} key={post.key} />
         ))}
       </div>
     </div>

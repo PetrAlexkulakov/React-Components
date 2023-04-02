@@ -17,7 +17,7 @@ const CardsList = () => {
 
   return (
     <div>
-      <SearchForm def={defValue} onChange={handleChange} />
+      <SearchForm data-testid="search-input" def={defValue} onChange={handleChange} />
       <div className="card-list">
         {sortedPosts.map((post) => (
           <CardItem {...post} image={post.image} key={post.id} />
