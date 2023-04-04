@@ -1,121 +1,92 @@
-import React, { ChangeEventHandler, MouseEventHandler, useState, useRef } from 'react';
+import React, { MouseEventHandler } from 'react';
 import Header from '../components/Header';
 import MyButton from '../components/UI/button/MyButton';
 import MyInput from '../components/UI/input/MyInput';
 import CardItem from '../components/CardItem';
-import { BaseSyntheticEvent } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-type MyState = {
+type FormValues = {
   body?: string;
   title?: string;
-  key?: string;
   city?: string;
-  accept?: string;
+  accept?: boolean;
   switch?: string;
   image?: string;
-}[];
+};
+
+type Post = FormValues & {
+  key?: string;
+};
 
 const Forms = () => {
-  const [posts, setPosts] = useState<MyState>([]);
-  let thisForm: HTMLFormElement | null = null;
-  const formName = useRef<HTMLInputElement | null>(null);
-  const formDate = useRef<HTMLInputElement | null>(null);
-  let formCity = 'Moscow';
-  const formAccept = useRef<HTMLInputElement | null>(null);
-  let formSwitch = 'First';
-  const formFile = useRef<HTMLInputElement | null>(null);
-
-  const addNewCard = (e: MouseEvent) => {
-    e.preventDefault();
-    if (validForm() && confirm('Are u sure?')) {
-      setPosts([
-        ...posts,
-        {
-          key: String(new Date()),
-          title: formDate.current?.value,
-          body: formName.current?.value,
-          city: formCity,
-          switch: formSwitch,
-          image: URL.createObjectURL(formFile.current!.files![0]),
-        },
-      ]);
-      formSwitch = 'First';
-      clearForm();
+  const { register, handleSubmit, reset, formState } = useForm<FormValues>();
+  const { isDirty, isValid } = formState;
+  const [posts, setPosts] = React.useState<Post[]>([]);
+  const onSubmit = (data: {
+    body?: string;
+    title?: string;
+    city?: string;
+    accept?: boolean;
+    switch?: string;
+    image?: FileList;
+  }) => {
+    if (isValid && isDirty && window.confirm('Are u sure?')) {
+      const newPost: Post = {
+        key: String(new Date()),
+        title: data.title,
+        body: data.body,
+        city: data.city,
+        switch: data.switch,
+        image: data.image ? URL.createObjectURL(data.image[0]) : undefined, //URL.createObjectURL(formFile.current!.files![0]),
+      };
+      setPosts([...posts, newPost]);
+      reset();
     }
   };
-
-  function clearForm() {
-    thisForm?.reset();
-  }
-
-  function selectChange(e: BaseSyntheticEvent) {
-    formCity = String(e.target.value);
-  }
-
-  function validForm() {
-    formDate.current!.style.backgroundColor = '';
-    formName.current!.style.backgroundColor = '';
-    formFile.current!.style.backgroundColor = '';
-
-    if (formDate.current?.value === '') {
-      formDate.current.style.backgroundColor = 'red';
-    }
-    if (formName.current?.value === '') {
-      formName.current.style.backgroundColor = 'red';
-    }
-    if (formFile.current!.files![0] == null) {
-      formFile.current!.style.backgroundColor = 'red';
-    }
-    if (formAccept.current?.checked === false) {
-      alert('You should accept personal data!');
-    }
-
-    if (
-      formDate.current?.value === '' ||
-      formName.current?.value === '' ||
-      formFile.current!.files![0] == null ||
-      formAccept.current?.checked === false
-    ) {
-      return false;
-    }
-    return true;
-  }
 
   return (
     <div>
       <Header title="Forms" />
-      <form className="form-wrapper" ref={(form) => (thisForm = form)}>
+      <form className="form-wrapper" onSubmit={handleSubmit(onSubmit as SubmitHandler<FormValues>)}>
         <div>
-          Text: <MyInput ref={formName} type="text" placeholder="Text" />
+          Text: <MyInput {...register('body', { required: true })} type="text" placeholder="Text" />
         </div>
         <div>
-          Date: <MyInput ref={formDate} type="date" placeholder="Date" />
+          Date:{' '}
+          <MyInput {...register('title', { required: true })} type="date" placeholder="Date" />
         </div>
         <div>
           City:
-          <select onChange={selectChange as unknown as ChangeEventHandler<HTMLSelectElement>}>
+          <select {...register('city', { required: true })}>
             <option value="Moscow">Moscow</option>
             <option value="New York">New York</option>
             <option value="Another">Another</option>
           </select>
         </div>
         <div>
-          <MyInput ref={formAccept} type="checkbox" /> I consent to my personal data
+          <MyInput {...register('accept', { required: true })} type="checkbox" /> I consent to my
+          personal data
         </div>
         <div>
           <MyInput
-            onClick={() => (formSwitch = 'First')}
+            {...register('switch')}
             type="radio"
             name="number"
+            value="First"
             defaultChecked
           />{' '}
-          First <MyInput onClick={() => (formSwitch = 'Second')} type="radio" name="number" />{' '}
-          Second
+          First <MyInput {...register('switch')} type="radio" name="number" value="Second" /> Second
         </div>
-        <MyInput ref={formFile} type="file" />
+        <MyInput {...register('image', { required: true })} type="file" name="image" />
         <MyButton
           data-testid="btn-add"
-          onClick={addNewCard as unknown as MouseEventHandler<HTMLButtonElement>}
+          type="submit"
+          disabled={!isValid || !isDirty}
+          onClick={
+            handleSubmit(
+              onSubmit as SubmitHandler<FormValues>
+            ) as MouseEventHandler<HTMLButtonElement>
+          }
         >
           Create Card
         </MyButton>
