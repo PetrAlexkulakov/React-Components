@@ -37,7 +37,7 @@ const Forms = () => {
         body: data.body,
         city: data.city,
         switch: data.switch,
-        image: data.image ? URL.createObjectURL(data.image[0]) : undefined, //URL.createObjectURL(formFile.current!.files![0]),
+        image: data.image ? URL.createObjectURL(data.image[0]) : undefined,
       };
       setPosts([...posts, newPost]);
       reset();
