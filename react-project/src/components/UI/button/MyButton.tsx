@@ -5,7 +5,7 @@ const MyButton = (props: {
   children: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
   type: 'button' | 'submit' | 'reset' | undefined;
-  disabled: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <button {...props} className={classes.myBtn}>

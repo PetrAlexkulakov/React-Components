@@ -16,3 +16,6 @@
     margin-left: 5%;
     display: grid;
 }
+.error-message{
+    background-color: red;
+}

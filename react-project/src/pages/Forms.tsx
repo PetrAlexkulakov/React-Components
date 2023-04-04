@@ -19,8 +19,13 @@ type Post = FormValues & {
 };
 
 const Forms = () => {
-  const { register, handleSubmit, reset, formState } = useForm<FormValues>();
-  const { isDirty, isValid } = formState;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty, isValid },
+    formState,
+  } = useForm<FormValues>({ mode: 'onChange' });
   const [posts, setPosts] = React.useState<Post[]>([]);
   const onSubmit = (data: {
     body?: string;
@@ -50,10 +55,12 @@ const Forms = () => {
       <form className="form-wrapper" onSubmit={handleSubmit(onSubmit as SubmitHandler<FormValues>)}>
         <div>
           Text: <MyInput {...register('body', { required: true })} type="text" placeholder="Text" />
+          {formState.errors.body && <span className="error-message">This field is required</span>}
         </div>
         <div>
           Date:{' '}
           <MyInput {...register('title', { required: true })} type="date" placeholder="Date" />
+          {formState.errors.title && <span className="error-message">This field is required</span>}
         </div>
         <div>
           City:
@@ -66,6 +73,9 @@ const Forms = () => {
         <div>
           <MyInput {...register('accept', { required: true })} type="checkbox" /> I consent to my
           personal data
+          {formState.errors.accept && (
+            <span className="error-message"> This field is required</span>
+          )}
         </div>
         <div>
           <MyInput
@@ -75,13 +85,14 @@ const Forms = () => {
             value="First"
             defaultChecked
           />{' '}
-          First <MyInput {...register('switch')} type="radio" name="number" value="Second" /> Second
+          First
+          <MyInput {...register('switch')} type="radio" name="number" value="Second" /> Second
         </div>
         <MyInput {...register('image', { required: true })} type="file" name="image" />
+        {formState.errors.image && <span className="error-message">This field is required</span>}
         <MyButton
           data-testid="btn-add"
           type="submit"
-          disabled={!isValid || !isDirty}
           onClick={
             handleSubmit(
               onSubmit as SubmitHandler<FormValues>
