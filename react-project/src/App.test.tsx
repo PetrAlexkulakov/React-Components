@@ -38,9 +38,9 @@ describe('Main', () => {
     render(<Main />);
     const input = screen.getByTestId('search-input');
     fireEvent.change(input, {
-      target: { value: 'su' },
+      target: { value: 'ri' },
     });
-    expect(screen.getAllByText(/sunt/i));
+    expect(screen.getAllByText(/rick/i));
   });
 });
 

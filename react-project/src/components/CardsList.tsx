@@ -1,7 +1,6 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useState, ChangeEvent, useEffect, FormEventHandler } from 'react';
 import CardItem from './CardItem';
 import SearchForm from './UI/input/SearchForm';
-import { posts } from '../data/posts';
 
 const CardsList = () => {
   const [defValue, setDefVal] = useState(localStorage.getItem('searchString') || '');
@@ -11,7 +10,6 @@ const CardsList = () => {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setDefVal(event.target.value);
     localStorage.setItem('searchString', event.target.value);
-    changeSortedPosts();
   }
 
   useEffect(() => {
@@ -19,6 +17,7 @@ const CardsList = () => {
   }, []);
 
   function changeSortedPosts() {
+    setLoaded(false);
     fetch(`https://rickandmortyapi.com/api/character/?name=${localStorage.getItem('searchString')}`)
       .then((resp) => resp.json())
       .then((resp) => {
@@ -29,7 +28,17 @@ const CardsList = () => {
 
   return (
     <div>
-      <SearchForm data-testid="search-input" def={defValue} onChange={handleChange} />
+      <SearchForm
+        data-testid="search-input"
+        def={defValue}
+        onChange={handleChange}
+        onSubmit={
+          ((e: SubmitEvent) => {
+            e.preventDefault();
+            changeSortedPosts();
+          }) as unknown as FormEventHandler
+        }
+      />
       <div>
         {!isLoaded ? (
           <div>Loading...</div>
