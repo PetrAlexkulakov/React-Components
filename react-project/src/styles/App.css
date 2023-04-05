@@ -1,5 +1,6 @@
 .card-list{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     gap: 3%;
     row-gap: 15px;
