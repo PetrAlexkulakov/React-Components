@@ -104,7 +104,7 @@ const Forms = () => {
       </form>
       <div className="card-list">
         {posts.map((post) => (
-          <CardItem data-testid="card" {...post} image={post.image} key={post.key} />
+          <CardItem data-testid="card" {...post} image={post.image} key={Number(post.key)} />
         ))}
       </div>
     </div>

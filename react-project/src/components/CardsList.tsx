@@ -9,11 +9,29 @@ const CardsList = () => {
   const [defValue, setDefVal] = useState(localStorage.getItem('searchString') || '');
   const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
+  const [isModalLoaded, setModalLoaded] = useState(false);
+  const [modalInfo, setModalInfo] = useState({
+    image: '',
+    name: '',
+    status: '',
+    species: '',
+    gender: '',
+  });
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setDefVal(event.target.value);
     localStorage.setItem('searchString', event.target.value);
+  }
+
+  function changeModalInfo(id: number) {
+    setModalLoaded(false);
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((resp) => resp.json())
+      .then((resp) => {
+        setModalInfo(resp);
+        setModalLoaded(true);
+      });
   }
 
   useEffect(() => {
@@ -54,21 +72,33 @@ const CardsList = () => {
                 title={post.name}
                 body={`Status: ${post.status}`}
                 key={post.id}
-                openModal={openModal}
+                onClick={() => {
+                  openModal();
+                  changeModalInfo(post.id);
+                }}
               />
             ))}
           </div>
         )}
       </div>
-      {isModalOpen && (
-        <div className={cl.modal}>
-          <div className={cl['modal-overlay']}></div>
-          <div className={cl['modal-content']}>
-            <div className={cl['modal-title']}>Modal Content</div>
-            <button onClick={closeModal}>Close Modal</button>
+      {isModalOpen &&
+        (!isModalLoaded ? (
+          <div className={cl.modal}>Loading...</div>
+        ) : (
+          <div className={cl.modal}>
+            <div className={cl['modal-overlay']}></div>
+            <div className={cl['modal-content']}>
+              <div className={cl['modal-title']}>{modalInfo.name}</div>
+              <div className={cl['modal-body']}>
+                <img className="card__image" src={modalInfo.image}></img>
+                <p>Status: {modalInfo.status}</p>
+                <p>Species: {modalInfo.species}</p>
+                <p>Gender: {modalInfo.gender}</p>
+              </div>
+              <button onClick={closeModal}>Close Modal</button>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
     </div>
   );
 };
