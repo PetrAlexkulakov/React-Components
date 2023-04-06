@@ -1,11 +1,15 @@
 import React, { useState, ChangeEvent, useEffect, FormEventHandler } from 'react';
 import CardItem from './CardItem';
 import SearchForm from './UI/input/SearchForm';
+import { ModalContext } from '../contexts/modalContext';
+import { useContext } from 'react';
+import cl from '../styles/MainOpen.module.css';
 
 const CardsList = () => {
   const [defValue, setDefVal] = useState(localStorage.getItem('searchString') || '');
   const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
+  const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setDefVal(event.target.value);
@@ -50,11 +54,21 @@ const CardsList = () => {
                 title={post.name}
                 body={`Status: ${post.status}`}
                 key={post.id}
+                openModal={openModal}
               />
             ))}
           </div>
         )}
       </div>
+      {isModalOpen && (
+        <div className={cl.modal}>
+          <div className={cl['modal-overlay']}></div>
+          <div className={cl['modal-content']}>
+            <div className={cl['modal-title']}>Modal Content</div>
+            <button onClick={closeModal}>Close Modal</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

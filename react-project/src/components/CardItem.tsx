@@ -6,11 +6,12 @@ interface CardObject {
   image?: string;
   city?: string;
   switch?: string;
+  openModal?: () => void;
 }
 
 const CardItem = (props: CardObject) => {
   return (
-    <div className="card-item">
+    <div className="card-item" onClick={props.openModal}>
       <h3>{props.title}</h3>
       <img className="card__image" src={props.image}></img>
       <p>{props.body}</p>
