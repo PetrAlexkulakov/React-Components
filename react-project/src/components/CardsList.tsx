@@ -87,7 +87,7 @@ const CardsList = () => {
         ) : (
           <div className={cl.modal}>
             <div className={cl['modal-overlay']} onClick={closeModal}>
-              <div className={cl['modal-content']}>
+              <div className={cl['modal-content']} onClick={(e) => e.stopPropagation()}>
                 <span className={cl['modal-close-btn']} onClick={closeModal}>
                   &times;
                 </span>
