@@ -86,16 +86,19 @@ const CardsList = () => {
           <div className={cl.modal}>Loading...</div>
         ) : (
           <div className={cl.modal}>
-            <div className={cl['modal-overlay']}></div>
-            <div className={cl['modal-content']}>
-              <div className={cl['modal-title']}>{modalInfo.name}</div>
-              <div className={cl['modal-body']}>
-                <img className="card__image" src={modalInfo.image}></img>
-                <p>Status: {modalInfo.status}</p>
-                <p>Species: {modalInfo.species}</p>
-                <p>Gender: {modalInfo.gender}</p>
+            <div className={cl['modal-overlay']} onClick={closeModal}>
+              <div className={cl['modal-content']}>
+                <span className={cl['modal-close-btn']} onClick={closeModal}>
+                  &times;
+                </span>
+                <div className={cl['modal-title']}>{modalInfo.name}</div>
+                <div className={cl['modal-body']}>
+                  <img className="card__image" src={modalInfo.image}></img>
+                  <p>Status: {modalInfo.status}</p>
+                  <p>Species: {modalInfo.species}</p>
+                  <p>Gender: {modalInfo.gender}</p>
+                </div>
               </div>
-              <button onClick={closeModal}>Close Modal</button>
             </div>
           </div>
         ))}
