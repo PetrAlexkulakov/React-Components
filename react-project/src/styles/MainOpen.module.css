@@ -54,3 +54,8 @@
 .modal-close-btn:hover {
   transform: scale(1.1);
 }
+
+.modal-loading {
+  background-color: white;
+  text-shadow: 0 0 10px red;
+}

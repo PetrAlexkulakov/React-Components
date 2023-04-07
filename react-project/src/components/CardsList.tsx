@@ -83,7 +83,7 @@ const CardsList = () => {
       </div>
       {isModalOpen &&
         (!isModalLoaded ? (
-          <div className={cl.modal}>Loading...</div>
+          <div className={cl['modal-loading']}>Loading...</div>
         ) : (
           <div className={cl.modal}>
             <div className={cl['modal-overlay']} onClick={closeModal}>
