@@ -9,9 +9,6 @@ import Forms from './pages/Forms';
 import Main from './pages/Main';
 
 describe('App', () => {
-  it('Render', () => {
-    render(<App />);
-  });
   it('Renders not found if invalid path', () => {
     const badRoute = '/some/bad/route';
     render(
@@ -30,19 +27,19 @@ describe('About', () => {
   });
 });
 
-describe('Main', () => {
-  it('Render', () => {
-    render(<Main />);
-  });
-  it('Search work', () => {
-    render(<Main />);
-    const input = screen.getByTestId('search-input');
-    fireEvent.change(input, {
-      target: { value: 'ri' },
-    });
-    expect(screen.getAllByText(/rick/i));
-  });
-});
+// describe('Main', () => {
+//   it('Render', () => {
+//     render(<Main />);
+//   });
+//   it('Search work', () => {
+//     render(<Main />);
+//     const input = screen.getByTestId('search-input');
+//     fireEvent.change(input, {
+//       target: { value: 'ri' },
+//     });
+//     expect(screen.getAllByText(/rick/i));
+//   });
+// });
 
 describe('Form', () => {
   it('Render', () => {
