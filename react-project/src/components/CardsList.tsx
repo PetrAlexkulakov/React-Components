@@ -51,7 +51,6 @@ const CardsList = () => {
   return (
     <div>
       <SearchForm
-        data-testid="search-input"
         def={defValue}
         onChange={handleChange}
         onSubmit={
@@ -68,6 +67,7 @@ const CardsList = () => {
           <div className="card-list">
             {sortedPosts?.map((post) => (
               <CardItem
+                data-testid="card-item"
                 image={post.image}
                 title={post.name}
                 body={`Status: ${post.status}`}

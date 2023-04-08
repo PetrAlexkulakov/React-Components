@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it } from 'vitest';
-import App from './App';
 import { MemoryRouter } from 'react-router-dom';
 import AppRouter from './components/UI/AppRouter';
+
 import About from './pages/About';
 import Forms from './pages/Forms';
 import Main from './pages/Main';
@@ -27,19 +27,32 @@ describe('About', () => {
   });
 });
 
-// describe('Main', () => {
-//   it('Render', () => {
-//     render(<Main />);
-//   });
-//   it('Search work', () => {
-//     render(<Main />);
-//     const input = screen.getByTestId('search-input');
-//     fireEvent.change(input, {
-//       target: { value: 'ri' },
-//     });
-//     expect(screen.getAllByText(/rick/i));
-//   });
-// });
+describe('Main', () => {
+  it('Render', () => {
+    render(<Main />);
+  });
+
+  it('Search work', async () => {
+    render(<Main />);
+    const input = await screen.findByTestId('search-input');
+    fireEvent.change(input, {
+      target: { value: 'ri' },
+    });
+    fireEvent.submit(input);
+
+    expect(await screen.findAllByText(/rick/i));
+  });
+
+  it('Open Modal', async () => {
+    render(<Main />);
+    // screen.debug();
+    const card = (await screen.findAllByText(/rick/i))[0];
+    fireEvent.click(card);
+    // screen.debug();
+    expect(await screen.findByText(/alive/i));
+    // screen.debug();
+  });
+});
 
 describe('Form', () => {
   it('Render', () => {

@@ -16,6 +16,7 @@ const SearchForm = (props: {
         onChange={props.onChange}
         value={props.def}
         type="text"
+        data-testid="search-input"
       />
     </form>
   );
