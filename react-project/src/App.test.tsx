@@ -3,6 +3,7 @@ import React from 'react';
 import { describe, it } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import AppRouter from './components/UI/AppRouter';
+import userEvent from '@testing-library/user-event';
 
 import About from './pages/About';
 import Forms from './pages/Forms';
@@ -45,12 +46,10 @@ describe('Main', () => {
 
   it('Open Modal', async () => {
     render(<Main />);
-    // screen.debug();
-    const card = (await screen.findAllByText(/rick/i))[0];
-    fireEvent.click(card);
-    // screen.debug();
-    expect(await screen.findByText(/alive/i));
-    // screen.debug();
+    const card = await screen.findByTestId('card-item');
+    await userEvent.click(card);
+    expect(screen.findByText('Gender: Male'));
+    screen.debug();
   });
 });
 

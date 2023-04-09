@@ -13,7 +13,7 @@ interface CardObject {
 
 const CardItem = (props: CardObject) => {
   return (
-    <div className="card-item" onClick={props.onClick}>
+    <div className="card-item" onClick={props.onClick} data-testid="card-item">
       <h3>{props.title}</h3>
       <img className="card__image" src={props.image}></img>
       <p>{props.body}</p>

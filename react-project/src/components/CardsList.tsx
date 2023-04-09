@@ -67,7 +67,6 @@ const CardsList = () => {
           <div className="card-list">
             {sortedPosts?.map((post) => (
               <CardItem
-                data-testid="card-item"
                 image={post.image}
                 title={post.name}
                 body={`Status: ${post.status}`}
