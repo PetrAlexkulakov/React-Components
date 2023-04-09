@@ -40,7 +40,11 @@ const CardsList = () => {
 
   function changeSortedPosts() {
     setLoaded(false);
-    fetch(`https://rickandmortyapi.com/api/character/?name=${localStorage.getItem('searchString')}`)
+    fetch(
+      `https://rickandmortyapi.com/api/character/?name=${
+        localStorage.getItem('searchString') || ''
+      }`
+    )
       .then((resp) => resp.json())
       .then((resp) => {
         setSortedPosts(resp.results);
