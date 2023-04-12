@@ -4,9 +4,13 @@ import SearchForm from './UI/input/SearchForm';
 import { ModalContext } from '../contexts/modalContext';
 import { useContext } from 'react';
 import cl from '../styles/MainOpen.module.css';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { changeSearchAction } from '../redux/searchText';
 
 const CardsList = () => {
-  const [defValue, setDefVal] = useState(localStorage.getItem('searchString') || '');
+  const dispatch = useDispatch();
+  const defValue = useSelector((state: { search: string }) => state.search);
   const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
@@ -20,8 +24,7 @@ const CardsList = () => {
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setDefVal(event.target.value);
-    localStorage.setItem('searchString', event.target.value);
+    dispatch(changeSearchAction(event.target.value));
   }
 
   function changeModalInfo(id: number) {
@@ -40,11 +43,7 @@ const CardsList = () => {
 
   function changeSortedPosts() {
     setLoaded(false);
-    fetch(
-      `https://rickandmortyapi.com/api/character/?name=${
-        localStorage.getItem('searchString') || ''
-      }`
-    )
+    fetch(`https://rickandmortyapi.com/api/character/?name=${defValue}`)
       .then((resp) => resp.json())
       .then((resp) => {
         setSortedPosts(resp.results);
@@ -55,7 +54,7 @@ const CardsList = () => {
   return (
     <div>
       <SearchForm
-        def={defValue}
+        def={String(defValue)}
         onChange={handleChange}
         onSubmit={
           ((e: SubmitEvent) => {

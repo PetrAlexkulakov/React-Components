@@ -1,5 +1,5 @@
 const defaultState = {
-  cash: '',
+  search: '',
 };
 
 const CHANGE_SEARCH = 'CHANGE_SEARCH';
