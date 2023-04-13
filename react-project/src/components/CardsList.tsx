@@ -7,10 +7,14 @@ import cl from '../styles/MainOpen.module.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changeSearchAction } from '../redux/searchText';
+import { rickApi } from '../redux/fetch/rickApi';
 
 const CardsList = () => {
   const dispatch = useDispatch();
-  const defValue = useSelector((state: { search: string }) => state.search);
+  const defValue = useSelector(
+    (state: { searchText: { search: string } }) => state.searchText.search
+  );
+  const { data: posts } = rickApi.useFetchAllPostsQuery('');
   const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
@@ -64,7 +68,20 @@ const CardsList = () => {
         }
       />
       <div>
-        {!isLoaded ? (
+        {posts &&
+          posts.results.map((post: { name: string; id: number; status: string; image: string }) => (
+            <CardItem
+              image={post.image}
+              title={post.name}
+              body={`Status: ${post.status}`}
+              key={post.id}
+              onClick={() => {
+                openModal();
+                changeModalInfo(post.id);
+              }}
+            />
+          ))}
+        {/* {!isLoaded ? (
           <div>Loading...</div>
         ) : (
           <div className="card-list">
@@ -81,7 +98,7 @@ const CardsList = () => {
               />
             ))}
           </div>
-        )}
+        )} */}
       </div>
       {isModalOpen &&
         (!isModalLoaded ? (
