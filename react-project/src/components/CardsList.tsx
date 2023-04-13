@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changeSearchAction } from '../redux/searchText';
 import { rickApi } from '../redux/fetch/rickApi';
+import { cardInt } from '../interfaces/cardInterface';
 
 const CardsList = () => {
   const dispatch = useDispatch();
   const defValue = useSelector(
     (state: { searchText: { search: string } }) => state.searchText.search
   );
-  const { data: posts } = rickApi.useFetchAllPostsQuery('');
+  const { data: posts } = rickApi.useFetchAllPostsQuery(defValue);
   const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
@@ -69,7 +70,7 @@ const CardsList = () => {
       />
       <div>
         {posts &&
-          posts.results.map((post: { name: string; id: number; status: string; image: string }) => (
+          posts.results.map((post: cardInt) => (
             <CardItem
               image={post.image}
               title={post.name}

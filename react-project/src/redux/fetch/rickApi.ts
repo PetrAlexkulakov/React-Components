@@ -5,8 +5,8 @@ export const rickApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://rickandmortyapi.com/api/' }),
   endpoints: (build) => ({
     fetchAllPosts: build.query({
-      query: () => ({
-        url: '/character',
+      query: (value) => ({
+        url: `/character/?name=${value}`,
       }),
     }),
   }),
