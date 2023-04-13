@@ -15,8 +15,9 @@ const CardsList = () => {
   const defValue = useSelector(
     (state: { searchText: { search: string } }) => state.searchText.search
   );
+  const [searchValue, changeSearchValue] = useState(defValue);
   const { data: posts } = rickApi.useFetchAllPostsQuery(defValue);
-  const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
+  // const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
   const [modalInfo, setModalInfo] = useState({
@@ -29,7 +30,15 @@ const CardsList = () => {
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    dispatch(changeSearchAction(event.target.value));
+    changeSearchValue(event.target.value);
+  }
+
+  function sumbitValue() {
+    setLoaded(false);
+    dispatch(changeSearchAction(searchValue));
+    setTimeout(() => {
+      setLoaded(true);
+    }, 100);
   }
 
   function changeModalInfo(id: number) {
@@ -43,45 +52,51 @@ const CardsList = () => {
   }
 
   useEffect(() => {
-    changeSortedPosts();
+    sumbitValue();
   }, []);
 
-  function changeSortedPosts() {
-    setLoaded(false);
-    fetch(`https://rickandmortyapi.com/api/character/?name=${defValue}`)
-      .then((resp) => resp.json())
-      .then((resp) => {
-        setSortedPosts(resp.results);
-        setLoaded(true);
-      });
-  }
+  // function changeSortedPosts() {
+  //   setLoaded(false);
+  //   fetch(`https://rickandmortyapi.com/api/character/?name=${defValue}`)
+  //     .then((resp) => resp.json())
+  //     .then((resp) => {
+  //       setSortedPosts(resp.results);
+  //       setLoaded(true);
+  //     });
+  // }
 
   return (
     <div>
       <SearchForm
-        def={String(defValue)}
+        def={String(searchValue)}
         onChange={handleChange}
         onSubmit={
           ((e: SubmitEvent) => {
             e.preventDefault();
-            changeSortedPosts();
+            sumbitValue();
           }) as unknown as FormEventHandler
         }
       />
       <div>
-        {posts &&
-          posts.results.map((post: cardInt) => (
-            <CardItem
-              image={post.image}
-              title={post.name}
-              body={`Status: ${post.status}`}
-              key={post.id}
-              onClick={() => {
-                openModal();
-                changeModalInfo(post.id);
-              }}
-            />
-          ))}
+        {!isLoaded ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="card-list">
+            {posts &&
+              posts.results.map((post: cardInt) => (
+                <CardItem
+                  image={post.image}
+                  title={post.name}
+                  body={`Status: ${post.status}`}
+                  key={post.id}
+                  onClick={() => {
+                    openModal();
+                    changeModalInfo(post.id);
+                  }}
+                />
+              ))}
+          </div>
+        )}
         {/* {!isLoaded ? (
           <div>Loading...</div>
         ) : (

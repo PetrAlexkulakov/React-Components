@@ -5,8 +5,8 @@ import { FormEventHandler } from 'react';
 
 const SearchForm = (props: {
   def: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
 }) => {
   return (
     <form onSubmit={props.onSubmit}>
