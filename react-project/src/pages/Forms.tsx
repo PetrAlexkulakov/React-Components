@@ -4,21 +4,13 @@ import MyButton from '../components/UI/button/MyButton';
 import MyInput from '../components/UI/input/MyInput';
 import CardItem from '../components/CardItem';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-type FormValues = {
-  body?: string;
-  title?: string;
-  city?: string;
-  accept?: boolean;
-  switch?: string;
-  image?: string;
-};
-
-type Post = FormValues & {
-  key?: string;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { FormValues } from '../interfaces/FormValues';
+import { Post } from '../interfaces/FormValues';
+import { changeFormsAction } from '../redux/allForms';
 
 const Forms = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -26,7 +18,8 @@ const Forms = () => {
     formState: { isDirty, isValid },
     formState,
   } = useForm<FormValues>({ mode: 'onChange' });
-  const [posts, setPosts] = React.useState<Post[]>([]);
+  // const [posts, setPosts] = React.useState<Post[]>([]);
+  const posts = useSelector((state: { allForms: { allForms: Post[] } }) => state.allForms.allForms);
   const onSubmit = (data: {
     body?: string;
     title?: string;
@@ -44,7 +37,8 @@ const Forms = () => {
         switch: data.switch,
         image: data.image ? URL.createObjectURL(data.image[0]) : undefined,
       };
-      setPosts([...posts, newPost]);
+      // setPosts([...posts, newPost]);
+      dispatch(changeFormsAction(newPost));
       reset();
     }
   };
@@ -104,7 +98,7 @@ const Forms = () => {
       </form>
       <div className="card-list">
         {posts.map((post) => (
-          <CardItem data-testid="card" {...post} image={post.image} key={Number(post.key)} />
+          <CardItem data-testid="card" {...post} image={post.image} key={post.key} />
         ))}
       </div>
     </div>

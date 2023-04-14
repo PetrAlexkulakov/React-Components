@@ -2,7 +2,7 @@ import React from 'react';
 import { MouseEventHandler } from 'react';
 
 interface CardObject {
-  key?: number;
+  key?: number | string;
   title?: string;
   body?: string;
   image?: string;
