@@ -22,18 +22,10 @@ const CardsList = () => {
     (state: { searchResult: { searchResult: { results: cardInt[] } } }) =>
       state.searchResult.searchResult
   );
-  const { data: fetchPosts } = rickApi.useFetchAllPostsQuery(defValue); //here
+  const { data: fetchPosts } = rickApi.useFetchAllPostsQuery(defValue);
   const { data: modalInfo } = rickApi.useFetchOnePostQuery(needableId);
-  // const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
-  // const [modalInfo, setModalInfo] = useState({
-  //   image: '',
-  //   name: '',
-  //   status: '',
-  //   species: '',
-  //   gender: '',
-  // });
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   useEffect(() => {
@@ -50,35 +42,16 @@ const CardsList = () => {
     setTimeout(() => {
       setLoaded(true);
     }, 500);
-    // todo
   }
 
   function changeModalInfo(id: number) {
-    // setModalLoaded(false);
     changeNeedableId(id);
     setModalLoaded(true);
-    //   fetch(`https://rickandmortyapi.com/api/character/${1}`)
-    //     .then((resp) => resp.json())
-    //     .then((resp) => {
-    //       // setModalInfo(resp);
-
-    //     });
   }
 
   useEffect(() => {
-    // dispatch(changeSearchResultAction(fetchPosts));
     sumbitValue();
   }, []);
-
-  // function changeSortedPosts() {
-  //   setLoaded(false);
-  //   fetch(`https://rickandmortyapi.com/api/character/?name=${defValue}`)
-  //     .then((resp) => resp.json())
-  //     .then((resp) => {
-  //       setSortedPosts(resp.results);
-  //       setLoaded(true);
-  //     });
-  // }
 
   return (
     <div>
@@ -112,24 +85,6 @@ const CardsList = () => {
               ))}
           </div>
         )}
-        {/* {!isLoaded ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="card-list">
-            {sortedPosts?.map((post) => (
-              <CardItem
-                image={post.image}
-                title={post.name}
-                body={`Status: ${post.status}`}
-                key={post.id}
-                onClick={() => {
-                  openModal();
-                  changeModalInfo(post.id);
-                }}
-              />
-            ))}
-          </div>
-        )} */}
       </div>
       {isModalOpen &&
         (!isModalLoaded ? (
