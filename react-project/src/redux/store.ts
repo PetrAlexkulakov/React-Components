@@ -1,6 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import { combineReducers } from 'redux';
 import { searchReducer } from './searchText';
 import { configureStore } from '@reduxjs/toolkit';
 import { rickApi } from './fetch/rickApi';
@@ -20,5 +18,3 @@ export const setupStore = () => {
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rickApi.middleware),
   });
 };
-
-export const store = createStore(searchReducer, composeWithDevTools(applyMiddleware(thunk)));
