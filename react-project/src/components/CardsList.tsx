@@ -7,6 +7,7 @@ import cl from '../styles/MainOpen.module.css';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changeSearchAction } from '../redux/searchText';
+import { changeSearchResultAction } from '../redux/searchResult';
 import { rickApi } from '../redux/fetch/rickApi';
 import { cardInt } from '../interfaces/cardInterface';
 
@@ -17,7 +18,11 @@ const CardsList = () => {
   );
   const [searchValue, changeSearchValue] = useState(defValue);
   const [needableId, changeNeedableId] = useState(1);
-  const { data: posts } = rickApi.useFetchAllPostsQuery(defValue);
+  const posts = useSelector(
+    (state: { searchResult: { searchResult: { results: cardInt[] } } }) =>
+      state.searchResult.searchResult
+  );
+  const { data: fetchPosts } = rickApi.useFetchAllPostsQuery(defValue); //here
   const { data: modalInfo } = rickApi.useFetchOnePostQuery(needableId);
   // const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
@@ -30,6 +35,10 @@ const CardsList = () => {
   //   gender: '',
   // });
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    dispatch(changeSearchResultAction(fetchPosts));
+  });
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     changeSearchValue(event.target.value);
@@ -57,6 +66,7 @@ const CardsList = () => {
   }
 
   useEffect(() => {
+    // dispatch(changeSearchResultAction(fetchPosts));
     sumbitValue();
   }, []);
 
@@ -88,7 +98,7 @@ const CardsList = () => {
         ) : (
           <div className="card-list">
             {posts &&
-              posts.results.map((post: cardInt) => (
+              posts?.results?.map((post: cardInt) => (
                 <CardItem
                   image={post.image}
                   title={post.name}
