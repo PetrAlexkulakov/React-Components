@@ -16,17 +16,19 @@ const CardsList = () => {
     (state: { searchText: { search: string } }) => state.searchText.search
   );
   const [searchValue, changeSearchValue] = useState(defValue);
+  const [needableId, changeNeedableId] = useState(1);
   const { data: posts } = rickApi.useFetchAllPostsQuery(defValue);
+  const { data: modalInfo } = rickApi.useFetchOnePostQuery(needableId);
   // const [sortedPosts, setSortedPosts] = useState([{ image: '', name: '', status: '', id: 0 }]);
   const [isLoaded, setLoaded] = useState(false);
   const [isModalLoaded, setModalLoaded] = useState(false);
-  const [modalInfo, setModalInfo] = useState({
-    image: '',
-    name: '',
-    status: '',
-    species: '',
-    gender: '',
-  });
+  // const [modalInfo, setModalInfo] = useState({
+  //   image: '',
+  //   name: '',
+  //   status: '',
+  //   species: '',
+  //   gender: '',
+  // });
   const { isModalOpen, openModal, closeModal } = useContext(ModalContext);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -38,17 +40,20 @@ const CardsList = () => {
     dispatch(changeSearchAction(searchValue));
     setTimeout(() => {
       setLoaded(true);
-    }, 100);
+    }, 500);
+    // todo
   }
 
   function changeModalInfo(id: number) {
-    setModalLoaded(false);
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then((resp) => resp.json())
-      .then((resp) => {
-        setModalInfo(resp);
-        setModalLoaded(true);
-      });
+    // setModalLoaded(false);
+    changeNeedableId(id);
+    setModalLoaded(true);
+    //   fetch(`https://rickandmortyapi.com/api/character/${1}`)
+    //     .then((resp) => resp.json())
+    //     .then((resp) => {
+    //       // setModalInfo(resp);
+
+    //     });
   }
 
   useEffect(() => {

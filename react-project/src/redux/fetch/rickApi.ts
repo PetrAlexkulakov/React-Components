@@ -9,5 +9,11 @@ export const rickApi = createApi({
         url: `/character/?name=${value}`,
       }),
     }),
+    fetchOnePost: build.query({
+      query: (id) => ({
+        url: `character/${id}`,
+      }),
+    }),
   }),
 });
+// todo error handler
