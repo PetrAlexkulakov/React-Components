@@ -16,5 +16,6 @@
     "resolveJsonModule": true,
     "noEmit": true,
   },
-  "include": ["./src/**/*", "vite.config.ts", "styled.d.ts"]
+  "include": ["./src/**/*", "entry-server.tsx", "vite.config.ts", "styled.d.ts", "server.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

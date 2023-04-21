@@ -1,15 +1,32 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/setupTests.ts'],
-  },
+export default defineConfig(({ command }) => {
+  if (command === 'build') {
+    return {
+      ...devConfig,
+      ssr: {
+        // Add your external dependencies here for the SSR build, otherwise,
+        // the bundled won't have enough libraries to render noExternal:
+        // [/@\w+\/*/],
+      },
+    };
+  }
+
+  return devConfig;
 });
+
+const devConfig = {
+  plugins: [react(), cssInjectedByJsPlugin()],
+
+  build: {
+    rollupOptions: {
+      input: './src/main.tsx',
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+};
