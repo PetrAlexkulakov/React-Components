@@ -12,9 +12,11 @@ const rootReducer = combineReducers({
   [rickApi.reducerPath]: rickApi.reducer,
 });
 
-export const setupStore = () => {
+const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rickApi.middleware),
   });
 };
+
+export const store = setupStore();

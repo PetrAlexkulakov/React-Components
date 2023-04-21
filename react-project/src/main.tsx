@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ModalProvider } from './contexts/modalContext';
 import { Provider } from 'react-redux';
-import { setupStore } from './redux/store';
-import About from './pages/About';
+import { store } from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
 
 // ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 //   <React.StrictMode>
@@ -19,13 +19,13 @@ import About from './pages/About';
 const root = document.getElementById('root') as HTMLElement;
 ReactDOM.hydrateRoot(
   root,
-  <React.StrictMode>
+  <BrowserRouter>
     <ModalProvider>
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <App />
       </Provider>
     </ModalProvider>
-  </React.StrictMode>
+  </BrowserRouter>
 );
 
 // const root = document.getElementById('root') as HTMLElement;

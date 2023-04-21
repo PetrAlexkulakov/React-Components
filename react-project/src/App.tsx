@@ -6,10 +6,10 @@ import AppRouter from './components/UI/AppRouter';
 
 function App() {
   return (
-    <BrowserRouter>
+    <div>
       <Navbar />
       <AppRouter />
-    </BrowserRouter>
+    </div>
   );
 }
 

@@ -6,7 +6,7 @@ import Html from './src/Html';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ModalProvider } from './src/contexts/modalContext';
-import { setupStore } from './src/redux/store';
+import { store } from './src/redux/store';
 import { StaticRouter } from 'react-router-dom/server';
 
 export function render(req: Request, res: Response, bootstrap: string) {
@@ -14,15 +14,15 @@ export function render(req: Request, res: Response, bootstrap: string) {
     // <Html>
     //   <App />
     // </Html>,
-    <Html>
-      <ModalProvider>
-        <Provider store={setupStore()}>
-          <StaticRouter location={req.url}>
+    <StaticRouter location={req.url}>
+      <Html>
+        <ModalProvider>
+          <Provider store={store}>
             <App />
-          </StaticRouter>
-        </Provider>
-      </ModalProvider>
-    </Html>,
+          </Provider>
+        </ModalProvider>
+      </Html>
+    </StaticRouter>,
     // <Html>
     //   <About />
     // </Html>,
