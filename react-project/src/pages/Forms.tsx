@@ -18,7 +18,7 @@ const Forms = () => {
     formState: { isDirty, isValid },
     formState,
   } = useForm<FormValues>({ mode: 'onChange' });
-  // const [posts, setPosts] = React.useState<Post[]>([]);
+
   const posts = useSelector((state: { allForms: { allForms: Post[] } }) => state.allForms.allForms);
   const onSubmit = (data: {
     body?: string;
@@ -37,7 +37,6 @@ const Forms = () => {
         switch: data.switch,
         image: data.image ? URL.createObjectURL(data.image[0]) : undefined,
       };
-      // setPosts([...posts, newPost]);
       dispatch(changeFormsAction(newPost));
       reset();
     }

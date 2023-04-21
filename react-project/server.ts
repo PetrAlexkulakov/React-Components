@@ -4,14 +4,14 @@ import fs from 'fs';
 async function configProd(app: Express) {
   app.use(
     (await import('serve-static')).default('./dist/client', {
-      index: false, // don't send index.html as there's none
+      index: false,
     })
   );
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const render = (await import('./dist/server/entry-server.js')).render;
-  // replace bootstrap script with compiled scripts
+
   const bootstrap =
     '/assets/' +
     fs
@@ -23,7 +23,7 @@ async function configProd(app: Express) {
 
 async function configDev(app: Express) {
   const cwd = process.cwd();
-  // dev mode, configure vite as middleware
+
   const vite = await (
     await import('vite')
   ).createServer({
@@ -37,8 +37,6 @@ async function configDev(app: Express) {
   app.use(vite.middlewares);
 
   const renderer = async (req: Request, res: Response) => {
-    // in dev mode, we will try to load the render function for every request,
-    // so that editing the entry-server file take effect without restart server.
     try {
       const render = (await vite.ssrLoadModule('./entry-server.tsx')).render;
       render(req, res, `/src/main.tsx`);

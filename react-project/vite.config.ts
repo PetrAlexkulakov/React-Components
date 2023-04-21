@@ -8,9 +8,7 @@ export default defineConfig(({ command }) => {
     return {
       ...devConfig,
       ssr: {
-        // Add your external dependencies here for the SSR build, otherwise,
-        // the bundled won't have enough libraries to render noExternal:
-        // [/@\w+\/*/],
+        // todo?
       },
     };
   }

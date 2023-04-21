@@ -11,9 +11,6 @@ import { StaticRouter } from 'react-router-dom/server';
 
 export function render(req: Request, res: Response, bootstrap: string) {
   const { pipe } = ReactDOMServer.renderToPipeableStream(
-    // <Html>
-    //   <App />
-    // </Html>,
     <StaticRouter location={req.url}>
       <Html>
         <ModalProvider>
@@ -23,9 +20,6 @@ export function render(req: Request, res: Response, bootstrap: string) {
         </ModalProvider>
       </Html>
     </StaticRouter>,
-    // <Html>
-    //   <About />
-    // </Html>,
     {
       onShellReady() {
         res.statusCode = 200;

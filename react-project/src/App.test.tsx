@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import AppRouter from './components/UI/AppRouter';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import { setupStore } from './redux/store';
+import { store } from './redux/store';
 
 import About from './pages/About';
 import Forms from './pages/Forms';
@@ -33,7 +33,7 @@ describe('About', () => {
 describe('Main', () => {
   it('Render', () => {
     render(
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <Main />
       </Provider>
     );
@@ -41,7 +41,7 @@ describe('Main', () => {
 
   it('Search work', async () => {
     render(
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <Main />
       </Provider>
     );
@@ -56,7 +56,7 @@ describe('Main', () => {
 
   it('Open Modal', async () => {
     render(
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <Main />
       </Provider>
     );
@@ -70,14 +70,14 @@ describe('Main', () => {
 describe('Form', () => {
   it('Render', () => {
     render(
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <Forms />
       </Provider>
     );
   });
   it('Do not create empty card', () => {
     render(
-      <Provider store={setupStore()}>
+      <Provider store={store}>
         <Forms />
       </Provider>
     );

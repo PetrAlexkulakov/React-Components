@@ -7,7 +7,6 @@ interface HtmlProps {
 }
 
 function Html({ children }: HtmlProps) {
-  // inject vite refresh script to avoid "React refresh preamble was not loaded"
   let viteScripts = <></>;
   if (import.meta.env.DEV) {
     viteScripts = (
