@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import codeCoverageTask from '@cypress/code-coverage/task';
 
 export default defineConfig({
   env: {
@@ -9,7 +10,12 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      codeCoverageTask(on, config);
+      // include any other plugin code...
+
+      // It's IMPORTANT to return the config object
+      // with any changed environment variables
+      return config;
     },
   },
   component: {
@@ -18,9 +24,7 @@ export default defineConfig({
       bundler: 'vite',
     },
     setupNodeEvents(on, config) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      require('@cypress/code-coverage/task')(on, config);
-
+      codeCoverageTask(on, config);
       return config;
     },
   },
