@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { describe, it, test, expect } from 'vitest';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import AppRouter from './components/UI/AppRouter';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
@@ -16,7 +16,6 @@ import App from './App';
 import { ModalProvider } from './contexts/modalContext';
 import { StaticRouter } from 'react-router-dom/server';
 import Html from './Html';
-import ReactDOM from 'react-dom';
 
 describe('App', () => {
   test('Renders not found if invalid path', () => {
