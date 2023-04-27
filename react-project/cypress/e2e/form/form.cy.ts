@@ -15,14 +15,10 @@
 //     // cy.get('.action-email').should('have.value', 'fake@email.com');
 //   });
 // });
-describe('Just visit e2e test', () => {
-  it('should visit main', () => {
-    cy.visit('/');
-  });
-});
 
 describe('Just visit e2e test', () => {
   it('should visit form', () => {
-    cy.visit('/form');
+    cy.visit('/forms');
+    cy.contains('Forms');
   });
 });
