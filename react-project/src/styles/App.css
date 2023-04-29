@@ -1,0 +1,22 @@
+.card-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3%;
+    row-gap: 15px;
+}
+.card-item{
+    width: 31%;
+    border: black solid 1px;
+}
+.card__image{
+    width: 100%;
+}
+.form-wrapper{
+    width: 90%;
+    margin-left: 5%;
+    display: grid;
+}
+.error-message{
+    background-color: red;
+}
