@@ -10,6 +10,7 @@ import { changeSearchAction } from '../redux/searchText';
 import { changeSearchResultAction } from '../redux/searchResult';
 import { rickApi } from '../redux/fetch/rickApi';
 import { cardInt } from '../interfaces/cardInterface';
+import Loading from './UI/Loading/Loading';
 
 const CardsList = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const CardsList = () => {
     dispatch(changeSearchAction(searchValue));
     setTimeout(() => {
       setLoaded(true);
-    }, 500);
+    }, 1000);
   }
 
   function changeModalInfo(id: number) {
@@ -68,7 +69,7 @@ const CardsList = () => {
       />
       <div>
         {!isLoaded ? (
-          <div>Loading...</div>
+          <Loading />
         ) : (
           <div className="card-list">
             {posts &&
