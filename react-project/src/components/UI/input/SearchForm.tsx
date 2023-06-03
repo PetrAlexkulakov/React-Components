@@ -10,14 +10,17 @@ const SearchForm = (props: {
 }) => {
   return (
     <form onSubmit={props.onSubmit}>
-      <input
-        placeholder="Search"
-        className={classes.myInput}
-        onChange={props.onChange}
-        value={props.def}
-        type="text"
-        data-testid="search-input"
-      />
+      <label>
+        Enter the text you are looking for:{' '}
+        <input
+          placeholder="Search"
+          className={classes.myInput}
+          onChange={props.onChange}
+          value={props.def}
+          type="text"
+          data-testid="search-input"
+        />
+      </label>
     </form>
   );
 };

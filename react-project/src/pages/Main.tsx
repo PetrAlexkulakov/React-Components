@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/Header';
+import Header from '../components/UI/Header/Header';
 import CardsList from '../components/CardsList';
 
 const Main = () => {

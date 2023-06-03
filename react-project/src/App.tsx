@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div style={{ margin: '8px' }}>
+      <div className="app__wrapper">
         <AppRouter />
       </div>
     </BrowserRouter>

@@ -3,7 +3,7 @@ import CardItem from './CardItem';
 import SearchForm from './UI/input/SearchForm';
 import { ModalContext } from '../contexts/modalContext';
 import { useContext } from 'react';
-import cl from '../styles/MainOpen.module.css';
+import cl from '../styles/MainOpen.module.scss';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changeSearchAction } from '../redux/searchText';
@@ -57,16 +57,18 @@ const CardsList = () => {
 
   return (
     <div>
-      <SearchForm
-        def={String(searchValue)}
-        onChange={handleChange}
-        onSubmit={
-          ((e: SubmitEvent) => {
-            e.preventDefault();
-            sumbitValue();
-          }) as unknown as FormEventHandler
-        }
-      />
+      <div className="container">
+        <SearchForm
+          def={String(searchValue)}
+          onChange={handleChange}
+          onSubmit={
+            ((e: SubmitEvent) => {
+              e.preventDefault();
+              sumbitValue();
+            }) as unknown as FormEventHandler
+          }
+        />
+      </div>
       <div>
         {!isLoaded ? (
           <Loading />

@@ -2,6 +2,14 @@ body{
     margin: 0;
     font-family: cursive;
 }
+.app__wrapper{
+    min-height: 1000px;
+    border: 10px solid #15b6b8;
+    border-top: 0;
+    border-bottom: 0;
+    padding: 1.2em;
+    background-image: url('../assets/ramFont.jpg');
+}
 .card-list{
     display: flex;
     flex-direction: row;
@@ -11,7 +19,8 @@ body{
 }
 .card-item{
     width: 31%;
-    border: black solid 1px;
+    border: black solid 2px;
+    background-color: rgb(2, 194, 208);
 }
 .card__image{
     width: 100%;
@@ -23,4 +32,9 @@ body{
 }
 .error-message{
     background-color: red;
+}
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 }

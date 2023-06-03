@@ -1,9 +1,10 @@
 import React from 'react';
+import classes from './Header.module.scss';
 
 const Header = (props: { title: string }) => {
   return (
     <header>
-      <h1 style={{ textAlign: 'center' }}>{props.title}</h1>
+      <h1 className={classes.header}>{props.title}</h1>
     </header>
   );
 };
