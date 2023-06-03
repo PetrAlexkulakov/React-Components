@@ -8,7 +8,9 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <AppRouter />
+      <div style={{ margin: '8px' }}>
+        <AppRouter />
+      </div>
     </BrowserRouter>
   );
 }

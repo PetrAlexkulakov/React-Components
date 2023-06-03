@@ -5,7 +5,7 @@ import CardsList from '../components/CardsList';
 const Main = () => {
   return (
     <div>
-      <Header title="Main" />
+      <Header title="All Cards" />
       <CardsList />
     </div>
   );
