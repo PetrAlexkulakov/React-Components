@@ -1,8 +1,8 @@
 import React, { MouseEventHandler } from 'react';
-import Header from '../components/UI/Header/Header';
+import Header from '../components/Header/Header';
 import MyButton from '../components/UI/button/MyButton';
 import MyInput from '../components/UI/input/MyInput';
-import CardItem from '../components/CardItem';
+import CardItem from '../components/Cards/CardItem';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormValues } from '../interfaces/FormValues';

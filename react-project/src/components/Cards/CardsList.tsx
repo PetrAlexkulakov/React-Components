@@ -1,16 +1,17 @@
 import React, { useState, ChangeEvent, useEffect, FormEventHandler } from 'react';
 import CardItem from './CardItem';
-import SearchForm from './UI/input/SearchForm';
-import { ModalContext } from '../contexts/modalContext';
+import SearchForm from '../UI/input/SearchForm';
+import { ModalContext } from '../../contexts/modalContext';
 import { useContext } from 'react';
-import cl from '../styles/MainOpen.module.scss';
+import cl from '../../styles/MainOpen.module.scss';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { changeSearchAction } from '../redux/searchText';
-import { changeSearchResultAction } from '../redux/searchResult';
-import { rickApi } from '../redux/fetch/rickApi';
-import { cardInt } from '../interfaces/cardInterface';
-import Loading from './UI/Loading/Loading';
+import { changeSearchAction } from '../../redux/searchText';
+import { changeSearchResultAction } from '../../redux/searchResult';
+import { rickApi } from '../../redux/fetch/rickApi';
+import { cardInt } from '../../interfaces/cardInterface';
+import Loading from '../UI/Loading/Loading';
+import './Cards.scss';
 
 const CardsList = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/UI/Header/Header';
+import Header from '../components/Header/Header';
 import github from '../assets/github.png';
 import linkedIn from '../assets/LinkedIn.png';
 
