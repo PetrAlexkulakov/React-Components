@@ -49,6 +49,9 @@ const CardsList = () => {
   function changeModalInfo(id: number) {
     changeNeedableId(id);
     setModalLoaded(true);
+    setTimeout(() => {
+      setModalLoaded(false);
+    }, 300); //fix this somehow
   }
 
   useEffect(() => {
@@ -83,35 +86,32 @@ const CardsList = () => {
                   body={`Status: ${post.status}`}
                   key={post.id}
                   onClick={() => {
-                    openModal();
                     changeModalInfo(post.id);
+                    openModal();
                   }}
                 />
               ))}
           </div>
         )}
       </div>
-      {isModalOpen &&
-        (!isModalLoaded ? (
-          <div className={cl['modal-loading']}>Loading...</div>
-        ) : (
-          <div className={cl.modal}>
-            <div className={cl['modal-overlay']} onClick={closeModal}>
-              <div className={cl['modal-content']} onClick={(e) => e.stopPropagation()}>
-                <span className={cl['modal-close-btn']} onClick={closeModal}>
-                  &times;
-                </span>
-                <div className={cl['modal-title']}>{modalInfo.name}</div>
-                <div className={cl['modal-body']}>
-                  <img className="card__image" src={modalInfo.image}></img>
-                  <p>Status: {modalInfo.status}</p>
-                  <p>Species: {modalInfo.species}</p>
-                  <p>Gender: {modalInfo.gender}</p>
-                </div>
+      {isModalOpen && !isModalLoaded && (
+        <div className={cl.modal}>
+          <div className={cl['modal-overlay']} onClick={closeModal}>
+            <div className={cl['modal-content']} onClick={(e) => e.stopPropagation()}>
+              <span className={cl['modal-close-btn']} onClick={closeModal}>
+                &times;
+              </span>
+              <div className={cl['modal-title']}>{modalInfo.name}</div>
+              <div className={cl['modal-body']}>
+                <img className="card__image" src={modalInfo.image}></img>
+                <p>Status: {modalInfo.status}</p>
+                <p>Species: {modalInfo.species}</p>
+                <p>Gender: {modalInfo.gender}</p>
               </div>
             </div>
           </div>
-        ))}
+        </div>
+      )}
     </div>
   );
 };

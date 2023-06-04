@@ -20,7 +20,6 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    console.log('createModal function called');
     setIsModalOpen(true);
   };
 
