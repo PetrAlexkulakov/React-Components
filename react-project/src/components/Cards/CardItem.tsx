@@ -6,7 +6,7 @@ interface CardObject {
   title?: string;
   body?: string;
   image?: string;
-  city?: string;
+  status?: string;
   switch?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
@@ -17,7 +17,7 @@ const CardItem = (props: CardObject) => {
       <h3 className="card__text">{props.title}</h3>
       <img className="card__image" src={props.image}></img>
       <p className="card__text">{props.body}</p>
-      <p className="card__text">{props.city}</p>
+      <p className="card__text">{props.status}</p>
       <p className="card__text">{props.switch}</p>
     </div>
   );

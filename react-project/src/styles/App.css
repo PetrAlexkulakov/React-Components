@@ -13,7 +13,11 @@ body{
 .form-wrapper{
     width: 90%;
     margin-left: 5%;
+    margin-bottom: 2%;
     display: grid;
+    background-color: #15b6b8;
+    padding: 1em;
+    border: solid black 2px;
 }
 .error-message{
     background-color: red;

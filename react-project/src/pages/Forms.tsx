@@ -18,12 +18,11 @@ const Forms = () => {
     formState: { isDirty, isValid },
     formState,
   } = useForm<FormValues>({ mode: 'onChange' });
-  // const [posts, setPosts] = React.useState<Post[]>([]);
   const posts = useSelector((state: { allForms: { allForms: Post[] } }) => state.allForms.allForms);
   const onSubmit = (data: {
     body?: string;
     title?: string;
-    city?: string;
+    status?: string;
     accept?: boolean;
     switch?: string;
     image?: FileList;
@@ -33,11 +32,10 @@ const Forms = () => {
         key: String(new Date()),
         title: data.title,
         body: data.body,
-        city: data.city,
+        status: data.status,
         switch: data.switch,
         image: data.image ? URL.createObjectURL(data.image[0]) : undefined,
       };
-      // setPosts([...posts, newPost]);
       dispatch(changeFormsAction(newPost));
       reset();
     }
@@ -45,23 +43,24 @@ const Forms = () => {
 
   return (
     <div>
-      <Header title="Forms" />
+      <Header title="Create your own cards!" />
       <form className="form-wrapper" onSubmit={handleSubmit(onSubmit as SubmitHandler<FormValues>)}>
         <div>
-          Text: <MyInput {...register('body', { required: true })} type="text" placeholder="Text" />
+          Name:{' '}
+          <MyInput {...register('title', { required: true })} type="text" placeholder="Name" />
           {formState.errors.body && <span className="error-message">This field is required</span>}
         </div>
         <div>
-          Date:{' '}
-          <MyInput {...register('title', { required: true })} type="date" placeholder="Date" />
+          Date of birth:{' '}
+          <MyInput {...register('body', { required: true })} type="date" placeholder="Date" />
           {formState.errors.title && <span className="error-message">This field is required</span>}
         </div>
         <div>
-          City:
-          <select {...register('city', { required: true })}>
-            <option value="Moscow">Moscow</option>
-            <option value="New York">New York</option>
-            <option value="Another">Another</option>
+          Status:
+          <select {...register('status', { required: true })}>
+            <option value="Status: Alive">Alive</option>
+            <option value="Status: Dead">Dead</option>
+            <option value="Status: Unknown">Unknown</option>
           </select>
         </div>
         <div>
@@ -76,11 +75,12 @@ const Forms = () => {
             {...register('switch')}
             type="radio"
             name="number"
-            value="First"
+            value="Gender: Male"
             defaultChecked
           />{' '}
-          First
-          <MyInput {...register('switch')} type="radio" name="number" value="Second" /> Second
+          Male
+          <MyInput {...register('switch')} type="radio" name="number" value="Gender: Female" />{' '}
+          Female
         </div>
         <MyInput {...register('image', { required: true })} type="file" name="image" />
         {formState.errors.image && <span className="error-message">This field is required</span>}
