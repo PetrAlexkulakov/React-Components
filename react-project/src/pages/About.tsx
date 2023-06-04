@@ -7,7 +7,7 @@ const About = () => {
   return (
     <div style={{ textAlign: 'center' }}>
       <Header title="About us" />
-      <div style={{ margin: '5em' }}>
+      <div style={{ margin: '1%' }}>
         <p>
           This project was created as an example for a portfolio. But I love &quot;Rick and
           Morty&quot; :D

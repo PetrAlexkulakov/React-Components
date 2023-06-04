@@ -26,8 +26,7 @@ body{
     background-image: url('../assets/ramFont.jpg');
 }
 .form-wrapper{
-    width: 90%;
-    margin-left: 5%;
+    width: 80%;
     margin-bottom: 2%;
     display: grid;
     background-color: #15b6b8;

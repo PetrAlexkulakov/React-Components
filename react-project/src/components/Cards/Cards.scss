@@ -4,10 +4,10 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 3%;
-    row-gap: 15px;
+    row-gap: 1em;
 }
 .card-item{
-    width: 31%;
+    width: max-content;
     border: black solid 2px;
     background-color: rgb(2, 194, 208);
 }
