@@ -2,12 +2,27 @@ body{
     margin: 0;
     font-family: cursive;
 }
+@media all and (max-width: 575px) {
+    body {
+        font-size: 16px;
+    }
+}
+@media all and (max-width: 1000px) and (min-width: 575px) {
+    body {
+        font-size: 18px;
+    }
+}
+@media all and (min-width: 1000px) {
+    body {
+        font-size: 25px;
+    }
+}
 .app__wrapper{
     min-height: 90vh;
     border: 10px solid #15b6b8;
     border-top: 0;
     border-bottom: 0;
-    padding: 1.2em;
+    padding: 1%;
     background-image: url('../assets/ramFont.jpg');
 }
 .form-wrapper{

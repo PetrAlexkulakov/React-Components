@@ -6,7 +6,7 @@ import title from '../../../assets/title.png';
 const Navbar = () => {
   return (
     <div className={classes.navbar__wrapper}>
-      <img src={title} />
+      <img src={title} className={classes.navbar__img} />
       <div className={classes.navbar}>
         <div className={classes.navbar__links}>
           <Link to="/about">About us</Link>

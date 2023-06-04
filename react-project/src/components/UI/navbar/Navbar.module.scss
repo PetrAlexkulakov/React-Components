@@ -9,6 +9,9 @@
     flex-direction: column;
     justify-content: center;
 }
+.navbar__img{
+    max-width: 100%;
+}
 .navbar__links{
     display: flex;
     gap: 2%;
