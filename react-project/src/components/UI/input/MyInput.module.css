@@ -1,0 +1,11 @@
+.myInput {
+    margin-bottom: 2em;
+    color: black;
+    background-color: rgb(1, 255, 255);
+    max-width: 20em;
+}
+/* @media all and (max-width: 575px) {
+    .myInput {
+        width: 90px;
+    }
+} */

@@ -1,0 +1,23 @@
+.card-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3%;
+    row-gap: 1em;
+}
+.card-item{
+    width: max-content;
+    border: black solid 2px;
+    background-color: rgb(2, 194, 208);
+}
+.card__image{
+    width: 100%;
+    border-top: 2px solid rgb(0, 128, 137);
+    border-bottom: 2px solid rgb(0, 128, 137);
+}
+.card__text{
+    margin-left: 0.4em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
