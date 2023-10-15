@@ -3,26 +3,13 @@
 </p>
 
 <p align="center">
-   <img src="" alt="Unity Version">
-   <img src="" alt="Game Version">
-   <img src="" alt="License">
+   <a href="https://petralexkulakov-reactcomponents.netlify.app">Deploy</a>
 </p>
 
 ## About
 
-About Text Here
+Small project with cards. TypeScript + React
 
 ## Documentation
 
 Documentation Here
-
-## Distribute
-
-- [Service Name](Page Link)
-
-
-## Developers
-
-- [Delevoper Name](GitHub Profile Link)
-
-## License
